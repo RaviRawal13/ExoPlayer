@@ -538,19 +538,19 @@ public final class DefaultHlsPlaylistTracker
         lastSnapshotChangeMs = currentTimeMs;
         onPlaylistUpdated(playlistUrl, playlistSnapshot);
       } else if (!playlistSnapshot.hasEndTag) {
-        if (loadedPlaylist.mediaSequence + loadedPlaylist.segments.size()
-            < playlistSnapshot.mediaSequence) {
-          // The media sequence jumped backwards. The server has probably reset.
-          playlistError = new PlaylistResetException(playlistUrl.url);
-          notifyPlaylistError(playlistUrl, false);
-        } else if (currentTimeMs - lastSnapshotChangeMs
-            > C.usToMs(playlistSnapshot.targetDurationUs)
-                * PLAYLIST_STUCK_TARGET_DURATION_COEFFICIENT) {
-          // The playlist seems to be stuck. Blacklist it.
-          playlistError = new PlaylistStuckException(playlistUrl.url);
-          notifyPlaylistError(playlistUrl, true);
-          blacklistPlaylist();
-        }
+//        if (loadedPlaylist.mediaSequence + loadedPlaylist.segments.size()
+//            < playlistSnapshot.mediaSequence) {
+////          // The media sequence jumped backwards. The server has probably reset.
+////          playlistError = new PlaylistResetException(playlistUrl.url);
+////          notifyPlaylistError(playlistUrl, false);
+//        } else if (currentTimeMs - lastSnapshotChangeMs
+//            > C.usToMs(playlistSnapshot.targetDurationUs)
+//                * PLAYLIST_STUCK_TARGET_DURATION_COEFFICIENT) {
+////          // The playlist seems to be stuck. Blacklist it.
+////          playlistError = new PlaylistStuckException(playlistUrl.url);
+////          notifyPlaylistError(playlistUrl, true);
+////          blacklistPlaylist();
+//        }
       }
       // Do not allow the playlist to load again within the target duration if we obtained a new
       // snapshot, or half the target duration otherwise.
